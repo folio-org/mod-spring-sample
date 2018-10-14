@@ -2,6 +2,7 @@ logging:
   file: logs/mod-spring-sample.log
   level:
     org:
+      folio.rest: INFO
       hibernate: INFO
       springframework:
         security: INFO
@@ -34,8 +35,8 @@ spring:
     # database-platform: org.hibernate.dialect.PostgreSQLDialect
     
     properties.hibernate.jdbc.lob.non_contextual_creation: true
-    generate-ddl: true
-    hibernate.ddl-auto: create-drop
+    generate-ddl: false
+    hibernate.ddl-auto: none
     open-in-view: true
     show-sql: false
   profiles:
@@ -44,4 +45,10 @@ spring:
     mode: TEXT
     suffix: .sql
 
-additional.domain.packages:
+tenant:
+  header-name: X-Okapi-Tenant
+  force-tenant: false
+  default-tenant: diku
+  initialize-default-tenant: true
+  domain-packages:
+  schema-scripts:
