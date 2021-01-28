@@ -9,7 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.folio.rest.domain.model.AbstractBaseEntity;
+import org.folio.spring.domain.model.AbstractBaseEntity;
 
 @Entity
 public class Wand extends AbstractBaseEntity {

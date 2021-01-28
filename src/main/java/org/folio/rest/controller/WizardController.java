@@ -4,16 +4,16 @@ import org.folio.rest.model.Wizard;
 import org.folio.rest.model.repo.WizardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceProcessor;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelProcessor;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RepositoryRestController
-public class WizardController implements ResourceProcessor<Resource<Wizard>> {
+public class WizardController implements RepresentationModelProcessor<EntityModel<Wizard>> {
 
   @Autowired
   private WizardRepo wizardRepo;
@@ -31,18 +31,18 @@ public class WizardController implements ResourceProcessor<Resource<Wizard>> {
   }
 
   @Override
-  public Resource<Wizard> process(Resource<Wizard> resource) {
+  public EntityModel<Wizard> process(EntityModel<Wizard> resource) {
     // @formatter:off
     resource.add(
-      ControllerLinkBuilder.linkTo(
-        ControllerLinkBuilder
+      WebMvcLinkBuilder.linkTo(
+        WebMvcLinkBuilder
           .methodOn(WizardController.class)
           .incrementMagic(resource.getContent().getId())
       ).withRel("incrementMagic")
     );
     resource.add(
-      ControllerLinkBuilder.linkTo(
-        ControllerLinkBuilder
+      WebMvcLinkBuilder.linkTo(
+        WebMvcLinkBuilder
           .methodOn(WizardController.class)
           .decrementMagic(resource.getContent().getId())
       ).withRel("decrementMagic")
