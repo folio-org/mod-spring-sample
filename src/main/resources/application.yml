@@ -52,3 +52,10 @@ tenant:
   initialize-default-tenant: true
   domain-packages:
   schema-scripts:
+
+info:
+  build:
+    artifact: "@project.artifactId@"
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
